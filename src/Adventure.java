@@ -2,15 +2,16 @@ import java.util.Locale;
 
 public class Adventure {
     private UserInterface ui = new UserInterface(this);
-    private Room room1 = new Room("you find yourself in a room1");
-    private Room room2 = new Room("you find yourself in a room2");
-    private Room room3 = new Room("you find yourself in a room3");
-    private Room room4 = new Room("you find yourself in a room4");
-    private Room room5 = new Room("you find yourself in a room5");
-    private Room room6 = new Room("you find yourself in a room6");
-    private Room room7 = new Room("you find yourself in a room7");
-    private Room room8 = new Room("you find yourself in a room8");
-    private Room room9 = new Room("you find yourself in a room9");
+    private String bogstandard = "you find yourself in a room, ";
+    private Room room1 = new Room(bogstandard + "it's pretty dull");
+    private Room room2 = new Room(bogstandard + "nothing special about it");
+    private Room room3 = new Room(bogstandard + "beautifully boring");
+    private Room room4 = new Room(bogstandard + "wow.");
+    private Room room5 = new Room(bogstandard + "with walls gilded by gold, and in the center lies unimaginable treasure");
+    private Room room6 = new Room(bogstandard + "get help");
+    private Room room7 = new Room(bogstandard +"it's just a room");
+    private Room room8 = new Room(bogstandard + "a skibiddi room");
+    private Room room9 = new Room("you find yourself in a hard place");
     public Room currentRoom = room1;
 
 
