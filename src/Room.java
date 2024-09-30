@@ -7,12 +7,19 @@ public class Room {
     private Room west;
     public String roomDesc;
     private ArrayList<Item> it = new ArrayList<Item>();
+    boolean recentlyDescribed = false;
     public Room(String roomDesc) {
         this.roomDesc = roomDesc;
     }
-
     public String getRoomDesc() {
-        return roomDesc;
+        if (recentlyDescribed)
+        {
+            return("you're in a room that you've already seen");
+        }else {
+            recentlyDescribed = true;
+            return roomDesc;
+        }
+
     }
 
     public Room getNeighbour(String dir) {
@@ -47,6 +54,11 @@ public class Room {
     {
         it.add(new Item(name,desc));
     }
+    public String takeItem(Item i)
+    {
+        it.add(i);
+        return i.getName();
+    }
 
     String printItems()
     {
@@ -64,7 +76,6 @@ public class Room {
             String gotName = r.getName();
             if (gotName!=null && gotName.equalsIgnoreCase(item))
             {
-                System.out.println(r.getName());
                 it.remove(r);
                 return r;
 

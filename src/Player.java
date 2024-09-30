@@ -42,4 +42,21 @@ public class Player {
         }
         return itemList;
     }
+    public Item removeItem(String item)
+    {
+        for (Item r : inv)
+        {
+            String gotName = r.getName();
+            if (gotName!=null && gotName.equalsIgnoreCase(item))
+            {
+                inv.remove(r);
+                return r;
+            }
+        }
+        return  null;
+    }
+    public ArrayList<Item> getInv()
+    {
+        return inv;
+    }
 }

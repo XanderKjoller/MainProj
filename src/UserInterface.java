@@ -1,4 +1,3 @@
-import java.util.Locale;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -18,68 +17,68 @@ public class UserInterface {
 
     public boolean reqAction() {
         Scanner sc = new Scanner(System.in);
+
+
         while (true) {
+            printRoomDesc();
             System.out.println("what do you wish to do, look around, go in a cardinal direction? take something, or mayhaps just exit?");
             String in = sc.nextLine().toLowerCase();
-            if (in.contains("look")) {
-                Room curRoom = p.getCurrentRoom();
-                String items = curRoom.printItems();
-                if (items != "") {
-                    printRoomItems();
-                } else {
-                    System.out.println("your search for items had no result");
-                }
-            } else if (in.contains("exit")) {
-                return false;
-            } else if (in.contains("take".toLowerCase())) {
-                String[] split = in.split(" ");
-                if (split.length >1 && split[1] != null) {
-                    String pDiddy = p.addItem(p.getCurrentRoom().removeItem(split[1]));
-                    if (pDiddy!=null) {
-                        System.out.println("you've taken " + pDiddy);
-                    }else {
-                        System.out.println("life sucks and then you die");
+            switch (in) {
+                case "look", "l":
+                    Room curRoom = p.getCurrentRoom();
+                    String items = curRoom.printItems();
+                    printRoomDesc();
+                    if (items != "") {
+                        printRoomItems();
+                    } else {
+                        System.out.println("your search for items had no result");
                     }
-                }else{
-                    System.out.println("take what? in one sentence please");
-                }
-                else if (in.contains("take".toLowerCase())) {
-                    String[] split = in.split(" ");
-                    if (split.length >1 && split[1] != null) {
-                        String pDiddy = p.addItem(p.getCurrentRoom().removeItem(split[1]));
-                        if (pDiddy!=null) {
-                            System.out.println("you've taken " + pDiddy);
-                        }else {
-                            System.out.println("life sucks and then you die");
+                    break;
+                case "exit", "e":
+                    return false;
+                case "inv", "inventory", "i":
+                    String inv = p.printItems();
+                    if (inv != null) {
+                        System.out.println("your bag contains" + p.printItems());
+                    } else {
+                        System.out.println("your inventory is empty");
+                    }
+                    break;
+                default:
+                    String split[] =in.split(" ");
+                    if (split.length >1)
+                    {
+                        switch (split[0])
+                        {
+                            case"drop":
+                                if (p.getInv().size()>0) {
+                                    String pDiddy = p.getCurrentRoom().takeItem(p.removeItem(split[1]));
+                                    System.out.println("you dropped " + pDiddy);
+                                }
+                                break;
+                            case"take":
+                                String ziddy = p.addItem(p.getCurrentRoom().removeItem(split[1]));
+                                System.out.println("you took " + ziddy);
+                                break;
                         }
-                    }else{
-                        System.out.println("take what? in one sentence please");
-                    }
-
-
-            } else if (in.contains("inventory"))
-            {
-                String inv = p.printItems();
-                if (inv != null)
-                {
-                    System.out.println("your bag contains" + p.printItems());
-                }else{
-                    System.out.println("your inventory is empty");
-                }
-            }else {
-                for (Cardinals s : Cardinals.values()) {
-                    if (in.contains(s.toString())) {
-                        String goin = p.moveChar(s.toString());
-                        if (goin != null) {
-                        } else {
-                            System.out.println("there is no door " + s.toString());
+                    }else
+                    {
+                    for (Cardinals s : Cardinals.values()) {
+                        if (in.contains(s.toString())) {
+                            String goin = p.moveChar(s.toString());
+                            if (goin != null) {
+                            } else {
+                                System.out.println("there is no door " + s.toString());
+                                break;
+                            }
                         }
-                        break;
                     }
-                }
+                    }
+                    break;
             }
         }
     }
+
 
     public void printRoomItems() {
         System.out.println("within the room lies;" + p.getCurrentRoom().printItems());
@@ -88,5 +87,5 @@ public class UserInterface {
     public void printRoomDesc() {
         System.out.println(p.getCurrentRoom().getRoomDesc());
     }
-}
 
+}
