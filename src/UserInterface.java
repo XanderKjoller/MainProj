@@ -21,13 +21,17 @@ public class UserInterface {
 
         while (true) {
             printRoomDesc();
+
             System.out.println("what do you wish to do, look around, go in a cardinal direction? take something, or mayhaps just exit?");
+            Room curRoom = p.getCurrentRoom();
             String in = sc.nextLine().toLowerCase();
+
             switch (in) {
+                case "n":
+                    System.out.println(curRoom.printAllNeighbours());
+                            break;
                 case "look", "l":
-                    Room curRoom = p.getCurrentRoom();
                     String items = curRoom.printItems();
-                    printRoomDesc();
                     if (items != "") {
                         printRoomItems();
                     } else {
@@ -44,35 +48,36 @@ public class UserInterface {
                         System.out.println("your inventory is empty");
                     }
                     break;
+                case "hp", "health", "status":
+                    System.out.println("health = " + p.getHealt());
+                    break;
                 default:
-                    String split[] =in.split(" ");
-                    if (split.length >1)
-                    {
-                        switch (split[0])
-                        {
-                            case"drop":
-                                if (p.getInv().size()>0) {
-                                    String pDiddy = p.getCurrentRoom().takeItem(p.removeItem(split[1]));
-                                    System.out.println("you dropped " + pDiddy);
-                                }
-                                break;
-                            case"take":
-                                String ziddy = p.addItem(p.getCurrentRoom().removeItem(split[1]));
-                                System.out.println("you took " + ziddy);
-                                break;
-                        }
-                    }else
-                    {
+                    boolean doorFound = false;
                     for (Cardinals s : Cardinals.values()) {
                         if (in.contains(s.toString())) {
-                            String goin = p.moveChar(s.toString());
+                            String goin =  p.moveChar(s.toString());
+                            System.out.println(goin);
+                            doorFound = true;
                             if (goin != null) {
                             } else {
                                 System.out.println("there is no door " + s.toString());
                                 break;
                             }
+
                         }
                     }
+                    String split[] = in.split(" ");
+                    if (split.length == 2) {
+                        switch (split[0]) {
+                            case "drop":
+                                System.out.println("you dropped" + curRoom.takeItem(p.removeItem(split[1])));
+                            case "take":
+                                System.out.println("you took" + p.addItem(curRoom.removeItem(split[1])));
+                            case "eat":
+                                System.out.println(p.eatItem(split[1]));
+                        }
+                    } else {
+                        if (!doorFound) System.out.println("invalid input");
                     }
                     break;
             }
@@ -89,3 +94,38 @@ public class UserInterface {
     }
 
 }
+//                        String ziddy = "a";
+//                        switch (split[0]) {
+//                            case "drop":
+//                                for (int i = 1; i < split.length; i++) {
+//                                    String griddy = p.getCurrentRoom().takeItem(p.removeItem(split[i]));
+//                                    if (i >= (split.length - 1) && griddy != null) {
+//                                        ziddy = ziddy.substring(0, ziddy.length() - 1) + " and " + griddy + ".";
+//
+//
+//                                    } else if (griddy != null) {
+//                                        ziddy = ziddy + " " + griddy + ",";
+//                                    }
+//
+//                                }
+//                                System.out.println("you dropped " + ziddy);
+//                                break;
+//                            case "take":
+//                                boolean prevWasFalse;
+//                                for (int i = 1; i < split.length; i++) {
+//                                    String griddy = p.addItem(p.getCurrentRoom().removeItem(split[i]));
+//
+//                                    if (i > (split.length - 1)) {
+//                                        if (griddy != null) {
+//                                            ziddy = ziddy.substring(0, ziddy.length() - 1) + " and a" + griddy;
+//                                        }
+//
+//                                    } else {
+//                                        if (griddy != null) {
+//                                            ziddy = ziddy + " " + griddy + ",";
+//                                        }
+//                                    }
+//                                }
+//                                System.out.println("you took " + ziddy);
+//                                break;
+//}

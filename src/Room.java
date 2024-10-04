@@ -6,16 +6,19 @@ public class Room {
     private Room south;
     private Room west;
     public String roomDesc;
+    private String name;
     private ArrayList<Item> it = new ArrayList<Item>();
     boolean recentlyDescribed = false;
-    public Room(String roomDesc) {
+
+    public Room(String roomDesc, String name) {
         this.roomDesc = roomDesc;
+        this.name = name;
     }
+
     public String getRoomDesc() {
-        if (recentlyDescribed)
-        {
-            return("you're in a room that you've already seen");
-        }else {
+        if (recentlyDescribed) {
+            return ("you've seen this room before");
+        } else {
             recentlyDescribed = true;
             return roomDesc;
         }
@@ -43,44 +46,67 @@ public class Room {
                 break;
             case "east":
                 east = neighbour;
+                break;
             case "south":
                 south = neighbour;
+                break;
             case "west":
                 west = neighbour;
+                break;
         }
     }
 
-    public void addItem(String name, String desc)
-    {
-        it.add(new Item(name,desc));
+    public void addItem(String name, String desc) {
+        it.add(new Item(name, desc));
     }
-    public String takeItem(Item i)
-    {
+
+    public String takeItem(Item i) {
         it.add(i);
         return i.getName();
     }
 
-    String printItems()
-    {
+    String printItems() {
         String itemList = "";
-        for (Item r : it)
-        {
+        for (Item r : it) {
             itemList = itemList + "\n" + r.getName() + " " + r.getDesc();
         }
         return itemList;
     }
-    public Item removeItem(String item)
-    {
-        for (Item r : it)
-        {
+
+    public Item findItem(String item) {
+        for (Item r : it) {
             String gotName = r.getName();
-            if (gotName!=null && gotName.equalsIgnoreCase(item))
-            {
-                it.remove(r);
+            if (gotName != null && gotName.equalsIgnoreCase(item)) {
                 return r;
 
             }
         }
-        return  null;
+        return null;
+    }
+    public String getName()
+    {
+        return name;
+    }
+    public String printAllNeighbours()
+    {
+        String gethelp = "";
+        if (south != null) gethelp += (south.getName()+ " south ");
+        if (east != null) gethelp += (east.getName()+ " west ");
+        if (west != null) gethelp += (west.getName() + " east ");
+        if (north != null) gethelp += (north.getName()+ " north ");
+        return gethelp;
+    }
+
+    public Item removeItem(String item) {
+        Item found = findItem(item);
+        if (found != null) {
+            it.remove(found);
+            return found;
+        }
+        return null;
+    }
+
+    public void addByClass(Item i) {
+        it.add(i);
     }
 }

@@ -1,20 +1,22 @@
 public class Map {
     private String bogstandard = "you find yourself in a room, ";
-    private Room room1 = new Room(bogstandard + "it's pretty dull");
-    private Room room2 = new Room(bogstandard + "nothing special about it");
-    private Room room3 = new Room(bogstandard + "beautifully boring");
-    private Room room4 = new Room(bogstandard + "wow.");
-    private Room room5 = new Room(bogstandard + "with walls gilded by gold, and in the center lies unimaginable treasure");
-    private Room room6 = new Room(bogstandard + "get help");
-    private Room room7 = new Room(bogstandard +"it's just a room");
-    private Room room8 = new Room(bogstandard + "a skibiddi room");
-    private Room room9 = new Room("you find yourself in a hard place");
+    private Room room1 = new Room(bogstandard + "it's pretty dull", "1");
+    private Room room2 = new Room(bogstandard + "nothing special about it", "2");
+    private Room room3 = new Room(bogstandard + "beautifully boring", "3");
+    private Room room4 = new Room(bogstandard + "wow.", "4");
+    private Room room5 = new Room(bogstandard + "with walls gilded by gold, and in the center lies unimaginable treasure", "5");
+    private Room room6 = new Room(bogstandard + "get help", "6");
+    private Room room7 = new Room(bogstandard +"it's just a room", "7");
+    private Room room8 = new Room(bogstandard + "a skibiddi room", "8");
+    private Room room9 = new Room("you find yourself in a hard place", "9");
     public Map()
     {
+        Food app = new Food("apple","nomnom",100);
         connectRooms();
-        room1.addItem("gurh", "huhhhh");
-        room1.addItem("hjhg","awrfc");
-        room2.addItem("ghjk","faesgdtfjgk");
+        room1.addItem("house", "huhhhh");
+        room1.addItem("car","awrfc");
+        room1.addItem("grappler","faesgdtfjgk");
+        room1.addByClass(app);
     }
 
     public void addNeighbour(Room neighbour, Room neighbour2, String dir) {
@@ -54,5 +56,6 @@ public class Map {
        {
            return room1;
        }
+
 
 }
