@@ -9,6 +9,8 @@ public class Map {
     private Room room7 = new Room(bogstandard +"it's just a room", "7");
     private Room room8 = new Room(bogstandard + "a skibiddi room", "8");
     private Room room9 = new Room("you find yourself in a hard place", "9");
+    private RangedWeapon bow = new RangedWeapon("bow", "a tool", 100, 10);
+    private MeleeWeapon sword = new MeleeWeapon("sword", "it cuts", 50);
     public Map()
     {
         Food app = new Food("apple","nomnom",100);
@@ -17,6 +19,8 @@ public class Map {
         room1.addItem("car","awrfc");
         room1.addItem("grappler","faesgdtfjgk");
         room1.addByClass(app);
+        room1.addByClass(sword);
+        room1.addByClass(bow);
     }
 
     public void addNeighbour(Room neighbour, Room neighbour2, String dir) {

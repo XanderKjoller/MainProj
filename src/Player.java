@@ -3,9 +3,10 @@ import java.util.Locale;
 
 public class Player {
     private Room currentRoom;
-    public ArrayList<Item> inv = new ArrayList<Item>();
+    private ArrayList<Item> inv = new ArrayList<Item>();
     private int health = 100;
     private int maxHealth = 150;
+    private Weapon eqWeapon;
 
     public Player(Room initialRoom) {
         this.currentRoom = initialRoom;
@@ -72,6 +73,7 @@ public class Player {
     }
 
     public Item findItemAnyWhere(String nam) {
+        if (eqWeapon != null && eqWeapon.getName().equalsIgnoreCase(nam)) return eqWeapon;
         if (findItem(nam) != null) return findItem(nam);
         else return currentRoom.findItem(nam);
     }
@@ -92,5 +94,34 @@ public class Player {
         } else if (feast != null) {
             return nom + " is not food";
         } else return "there is no such item in your inventory or in the room";
+    }
+
+    public String equipWeapon(String itemName)
+    {
+       Item item = findItemAnyWhere(itemName);
+       if (item instanceof Weapon)
+       {
+           if(eqWeapon != null)inv.add(eqWeapon);
+           inv.remove(item);
+           currentRoom.removeItem(itemName);
+           eqWeapon = (Weapon) item;
+           return itemName;
+
+
+       }
+       return null;
+    }
+
+    public int attack(int times)
+    {
+        if (this.eqWeapon != null) {
+            int dmg = eqWeapon.use(times);
+            return dmg;
+        }
+        return 4;
+    }
+    public Weapon getWeapon()
+    {
+        return eqWeapon;
     }
 }
