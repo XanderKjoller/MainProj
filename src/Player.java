@@ -41,7 +41,7 @@ public class Player {
         }
     }
 
-    String printItems() {
+    public String printItems() {
         String itemList = "";
         for (Item r : inv) {
             itemList = itemList + "\n" + r.getName() + " " + r.getDesc();
@@ -77,6 +77,7 @@ public class Player {
         if (findItem(nam) != null) return findItem(nam);
         else return currentRoom.findItem(nam);
     }
+
     public void modifyHp(int healing)
     {
         health = health+healing;

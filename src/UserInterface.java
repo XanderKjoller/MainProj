@@ -7,12 +7,10 @@ public class UserInterface {
 
     private Adventure adv;
     private Player p;
-    private Map m;
     private Boolean noEvildoers;
 
     public UserInterface(Adventure adv) {
         this.adv = adv;
-        this.m = adv.getMap();
         this.p = adv.getPlayer();
         noEvildoers = p.getCurrentRoom().getEvilDoers().isEmpty();
     }
@@ -148,6 +146,7 @@ public class UserInterface {
                     if (!doorFound) System.out.println("invalid input");
                     break;
             }
+            System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         }
     }
 
@@ -172,5 +171,5 @@ public class UserInterface {
     public void help()
     {
 
-    }
+    }//should've printed a list of commands
 }

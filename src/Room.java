@@ -5,7 +5,7 @@ public class Room {
     private Room east;
     private Room south;
     private Room west;
-    public String roomDesc;
+    private String roomDesc;
     private String name;
     private ArrayList<Item> it = new ArrayList<Item>();
     boolean recentlyDescribed = false;
@@ -69,7 +69,7 @@ public class Room {
         return "nothing";
     }
 
-    String printItems() {
+    public String printItems() {
         String itemList = "";
         for (Item r : it) {
             itemList = itemList + "\n" + r.getName() + ", " + r.getDesc();
@@ -87,10 +87,12 @@ public class Room {
         }
         return null;
     }
+
     public String getName()
     {
         return name;
     }
+
     public String printAllNeighbours()
     {
         String gethelp = "";
@@ -113,19 +115,23 @@ public class Room {
     public void addByClass(Item i) {
         it.add(i);
     }
+
     public void addEnemy(Enemy e)
     {
         evilDoers.add(e);
         e.setCurrRoom(this);
     }
+
     public void removeEnemy(Enemy e)
     {
         evilDoers.remove(e);
     }
+
     public ArrayList<Enemy> getEvilDoers()
     {
         return  evilDoers;
     }
+
     public Enemy findEvilDoer(String villain)
     {
         for (Enemy r : evilDoers) {
@@ -136,7 +142,8 @@ public class Room {
         }
         return null;
     }
-    String printEvilDoers() {
+
+    public String printEvilDoers() {
         String evilList = "";
         for (Enemy r : evilDoers) {
             evilList = evilList + r.getName() + ", " + r.getDescription() + "\n";

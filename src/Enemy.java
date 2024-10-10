@@ -3,9 +3,10 @@ public class Enemy
     private int maxHp;
     private int hp;
     private Room currRoom;
-    private  Weapon equip;
+    private Weapon equip;
     private String name;
     private String description;
+
     public Enemy(String name, String description, Weapon equip, int maxHp)
     {
         this.name = name;
@@ -19,6 +20,7 @@ public class Enemy
     public int Attack(int times){
         return equip.damage;
     }
+
     public void hurt(int dmg)
     {
         hp = hp - dmg;
@@ -28,10 +30,11 @@ public class Enemy
     {
         currRoom.addByClass(equip);
     }
-    public Weapon getEq()
+
+    /*public Weapon getEq()
     {
         return equip;
-    }
+    }*/
 
     public String getName()
     {
@@ -43,17 +46,20 @@ public class Enemy
     }
 
     public String getWeaponName() {
-        return equip.name;
+        return equip.getName();
     }
+
     public void kill()
     {
         dropItem();
         currRoom.removeEnemy(this);
     }
+
     public void setCurrRoom(Room r)
     {
         this.currRoom = r;
     }
+
     public String getDescription(){
         return description;
     }
