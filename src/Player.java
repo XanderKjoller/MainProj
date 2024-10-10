@@ -37,7 +37,7 @@ public class Player {
             inv.add(it);
             return it.getName();
         } else {
-            return null;
+            return "nothing";
         }
     }
 
@@ -77,7 +77,7 @@ public class Player {
         if (findItem(nam) != null) return findItem(nam);
         else return currentRoom.findItem(nam);
     }
-    public void heal(int healing)
+    public void modifyHp(int healing)
     {
         health = health+healing;
         if (health>maxHealth) health = maxHealth;
@@ -89,7 +89,7 @@ public class Player {
             Food beast = (Food) feast;
             inv.remove(nom);
             currentRoom.removeItem(nom);
-            heal(beast.getHealing());
+            modifyHp(beast.getHealing());
             return "you ate " + nom + " and healed " + beast.getHealing() + " hp is now " +health;
         } else if (feast != null) {
             return nom + " is not food";

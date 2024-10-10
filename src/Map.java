@@ -11,16 +11,19 @@ public class Map {
     private Room room9 = new Room("you find yourself in a hard place", "9");
     private RangedWeapon bow = new RangedWeapon("bow", "a tool", 100, 10);
     private MeleeWeapon sword = new MeleeWeapon("sword", "it cuts", 50);
+    private MeleeWeapon mockery = new MeleeWeapon("mockery", "breaks bones", 30);
+    private Enemy eboy = new Enemy("E-boy", "the scourge of the internet", mockery, 60 );
+    private Enemy robot = new Enemy("robot", "beep boop", bow, 60 );
     public Map()
     {
         Food app = new Food("apple","nomnom",100);
         connectRooms();
-        room1.addItem("house", "huhhhh");
-        room1.addItem("car","awrfc");
-        room1.addItem("grappler","faesgdtfjgk");
+        room1.addItem("grappler","it looks cool ig");
         room1.addByClass(app);
         room1.addByClass(sword);
-        room1.addByClass(bow);
+        //room1.addByClass(bow);
+        room2.addEnemy(eboy);
+        room2.addEnemy(robot);
     }
 
     public void addNeighbour(Room neighbour, Room neighbour2, String dir) {

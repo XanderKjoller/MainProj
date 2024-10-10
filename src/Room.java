@@ -9,6 +9,7 @@ public class Room {
     private String name;
     private ArrayList<Item> it = new ArrayList<Item>();
     boolean recentlyDescribed = false;
+    private ArrayList<Enemy> evilDoers = new ArrayList<Enemy>();
 
     public Room(String roomDesc, String name) {
         this.roomDesc = roomDesc;
@@ -61,14 +62,17 @@ public class Room {
     }
 
     public String takeItem(Item i) {
-        it.add(i);
-        return i.getName();
+        if (i!=null) {
+            it.add(i);
+            return i.getName();
+        }
+        return "nothing";
     }
 
     String printItems() {
         String itemList = "";
         for (Item r : it) {
-            itemList = itemList + "\n" + r.getName() + " " + r.getDesc();
+            itemList = itemList + "\n" + r.getName() + ", " + r.getDesc();
         }
         return itemList;
     }
@@ -108,5 +112,35 @@ public class Room {
 
     public void addByClass(Item i) {
         it.add(i);
+    }
+    public void addEnemy(Enemy e)
+    {
+        evilDoers.add(e);
+        e.setCurrRoom(this);
+    }
+    public void removeEnemy(Enemy e)
+    {
+        evilDoers.remove(e);
+    }
+    public ArrayList<Enemy> getEvilDoers()
+    {
+        return  evilDoers;
+    }
+    public Enemy findEvilDoer(String villain)
+    {
+        for (Enemy r : evilDoers) {
+            String gotName = r.getName();
+            if (gotName != null && gotName.equalsIgnoreCase(villain)) {
+                return r;
+            }
+        }
+        return null;
+    }
+    String printEvilDoers() {
+        String evilList = "";
+        for (Enemy r : evilDoers) {
+            evilList = evilList + r.getName() + ", " + r.getDescription() + "\n";
+        }
+        return evilList;
     }
 }
