@@ -10,6 +10,7 @@ public class Map {
     private Room room8 = new Room(bogstandard + "a skibiddi room", "8");
     private Room room9 = new Room("you find yourself in a hard place", "9");
     private RangedWeapon bow = new RangedWeapon("bow", "a tool", 100, 10);
+    private RangedWeapon bow2 = new RangedWeapon("longbow", "a tool", 100, 0);
     private MeleeWeapon sword = new MeleeWeapon("sword", "it cuts", 50);
     private MeleeWeapon mockery = new MeleeWeapon("mockery", "breaks bones", 30);
     private Enemy eboy = new Enemy("E-boy", "the scourge of the internet", mockery, 60 );
@@ -21,7 +22,7 @@ public class Map {
         room1.addItem("grappler","it looks cool ig");
         room1.addByClass(app);
         room1.addByClass(sword);
-        //room1.addByClass(bow);
+        room1.addByClass(bow2);
         room2.addEnemy(eboy);
         room2.addEnemy(robot);
     }

@@ -37,18 +37,23 @@ public class Adventure {
     {   String eNam = e.getName();
         String eWep = e.getWeaponName();
         String exitMessage = "";
+
         int pDamage = p.attack(1);
-        e.hurt(pDamage);
-        exitMessage = exitMessage + "you hurt " + eNam + " for " + pDamage;
-        if (e.getHp()>=0) {
-            int eDam = e.Attack(1);
-            exitMessage = exitMessage + "\n" + eNam + " hp = " + e.getHp();
-            p.modifyHp(-eDam);
-            exitMessage = exitMessage + "\n" + eNam + " strikes you with " + eWep + " for " + eDam + "\n" +"your hp = " + p.getHealt();
-        }
-        else {
-            exitMessage = exitMessage + "\n" + eNam + " dies leaving his weapon, " + eWep + " on the floor";
-            e.kill();
+        if (pDamage == -1)
+        {
+            exitMessage = "your weapon is out of uses it is unwise to attack";
+        } else {
+            e.hurt(pDamage);
+            exitMessage = exitMessage + "you hurt " + eNam + " for " + pDamage;
+            if (e.getHp() >= 0) {
+                int eDam = e.Attack(1);
+                exitMessage = exitMessage + "\n" + eNam + " hp = " + e.getHp();
+                p.modifyHp(-eDam);
+                exitMessage = exitMessage + "\n" + eNam + " strikes you with " + eWep + " for " + eDam + "\n" + "your hp = " + p.getHealt();
+            } else {
+                exitMessage = exitMessage + "\n" + eNam + " dies leaving his weapon, " + eWep + " on the floor";
+                e.kill();
+            }
         }
         return exitMessage;
     }

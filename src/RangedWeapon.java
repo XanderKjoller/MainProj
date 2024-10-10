@@ -10,11 +10,11 @@ public class RangedWeapon extends Weapon {
     int use(int timesUsed) {
         if (uses>=timesUsed){
             uses = uses - timesUsed;
-            this.desc = desc.substring(0, (desc.indexOf("has"))) + "has " +uses+ " left";
+            this.desc = desc.substring(0, (desc.indexOf("has"))) + "has " +uses+ "uses" + " left";
             return timesUsed*damage;
 
         }
-        return 0;
+        return -1;
     }
 
     @Override
