@@ -20,25 +20,27 @@ public class UserInterface {
         printRoomDesc(p.getCurrentRoom());
 
         while (true) {
-            if (p.getHealt()<=0)
-            {
-                System.out.println("you succumb to your wounds."+ "\n" + "game over");
+            if (p.getHealt() <= 0) {
+                System.out.println("you succumb to your wounds." + "\n" + "game over");
                 return false;
             }
-            System.out.println("what do you wish to do, look around, go in a cardinal direction? take something, or mayhaps just exit?");
+            System.out.println("type help at any time for a list of commands");
             Room curRoom = p.getCurrentRoom();
             String in = sc.nextLine().toLowerCase();
             String split[] = in.split(" ");
             noEvildoers = curRoom.getEvilDoers().isEmpty();
 
             switch (split[0]) {
+                case "help":
+                    help();
+                    break;
+
                 case "n":
                     System.out.println(curRoom.printAllNeighbours());
                     break;
                 case "look", "l":
                     String items = curRoom.printItems();
-                    if (!noEvildoers)
-                    {
+                    if (!noEvildoers) {
                         System.out.println("enemies prevent you from finding items so you identify them instead");
                         printDetailedRoomDesc();
                         break;
@@ -68,38 +70,36 @@ public class UserInterface {
                 case "check":
                     Item foundStuff = p.findItemAnyWhere(split[1]);
                     if (foundStuff != null) System.out.println(foundStuff.desc);
-                    else System.out.println("you hold no such item");
+                    else System.out.println("there is no such item near you");
                     break;
                 case "drop":
                     if (split[1] != null) {
-
                         System.out.println("you dropped " + curRoom.takeItem(p.removeItem(split[1])));
-                    }else System.out.println("state an item too");
+                    } else System.out.println("state an item too");
                     break;
                 case "take":
-                    if (1 < split.length ) {
+                    if (1 < split.length) {
                         if (!curRoom.getEvilDoers().isEmpty()) {
                             System.out.println("too many bad guys to loot stuff");
-                        break;
+                            break;
                         }
                         System.out.println("you took " + p.addItem(curRoom.removeItem(split[1])));
-                    }else System.out.println("state an item too");
+                    } else System.out.println("state an item too");
                     break;
                 case "eat":
-                    if (split.length >1)
-                    {
-                    System.out.println(p.eatItem(split[1]));
-                    }else System.out.println("state a food as well");
+                    if (split.length > 1) {
+                        System.out.println(p.eatItem(split[1]));
+                    } else System.out.println("state a food as well");
                     break;
                 case "equip":
-                    if (split.length >1) {
+                    if (split.length > 1) {
                         String wep = p.equipWeapon(split[1]);
                         if (wep != null) {
                             System.out.println("you equipped " + wep);
                         } else {
                             System.out.println("there is no equippable item named " + split[1]);
                         }
-                    }else System.out.println("state an item as well");
+                    } else System.out.println("state an item as well");
                     break;
                 case "attack":
                     Weapon w = p.getWeapon();
@@ -118,7 +118,7 @@ public class UserInterface {
                                 System.out.println(adv.Fight(p, e));
                             }
                         }
-                    }else {
+                    } else {
                         e = curRoom.getEvilDoers().getFirst();
                         if (e != null) {
                             System.out.println(adv.Fight(p, e));
@@ -155,8 +155,7 @@ public class UserInterface {
         System.out.println("within the room lies;" + p.getCurrentRoom().printItems());
     }
 
-    public void printDetailedRoomDesc()
-    {
+    public void printDetailedRoomDesc() {
         Room cRoom = p.getCurrentRoom();
         if (!noEvildoers) System.out.println(cRoom.printEvilDoers());
         else printRoomItems();
@@ -168,8 +167,18 @@ public class UserInterface {
         if (!noEvildoers) System.out.println("you notice one or more enemies in the room");
     }
 
-    public void help()
-    {
-
+    public void help() {
+        System.out.println(
+                "look: take a look at your sorroundings\n"
+                        + "take (item): take an item from the room\n"
+                        + "drop (item): drop an item from your inventory\n"
+                        + "equip (item): equip an item from your inventory or the ground\n"
+                        + "eat (item): eat a food for healing effects\n"
+                        + "attack (enemy): attack an enemy, leave enemy empty to attack the first enemy found\n"
+                        + "check (item): take a look at a specific item\n"
+                        + "move (cardinal): move a given direction\n"
+                        + "inventory: look at your inventory\n"
+                        + "hp: check your remaining hp\n"
+        );
     }//should've printed a list of commands
 }

@@ -88,13 +88,11 @@ public class Room {
         return null;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public String printAllNeighbours()
-    {
+    public String printAllNeighbours() {
         String gethelp = "";
         if (south != null) gethelp += (south.getName()+ " south ");
         if (east != null) gethelp += (east.getName()+ " west ");
@@ -116,24 +114,20 @@ public class Room {
         it.add(i);
     }
 
-    public void addEnemy(Enemy e)
-    {
+    public void addEnemy(Enemy e) {
         evilDoers.add(e);
         e.setCurrRoom(this);
     }
 
-    public void removeEnemy(Enemy e)
-    {
+    public void removeEnemy(Enemy e) {
         evilDoers.remove(e);
     }
 
-    public ArrayList<Enemy> getEvilDoers()
-    {
+    public ArrayList<Enemy> getEvilDoers() {
         return  evilDoers;
     }
 
-    public Enemy findEvilDoer(String villain)
-    {
+    public Enemy findEvilDoer(String villain) {
         for (Enemy r : evilDoers) {
             String gotName = r.getName();
             if (gotName != null && gotName.equalsIgnoreCase(villain)) {

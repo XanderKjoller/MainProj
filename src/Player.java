@@ -78,8 +78,7 @@ public class Player {
         else return currentRoom.findItem(nam);
     }
 
-    public void modifyHp(int healing)
-    {
+    public void modifyHp(int healing) {
         health = health+healing;
         if (health>maxHealth) health = maxHealth;
     }
@@ -97,8 +96,7 @@ public class Player {
         } else return "there is no such item in your inventory or in the room";
     }
 
-    public String equipWeapon(String itemName)
-    {
+    public String equipWeapon(String itemName) {
        Item item = findItemAnyWhere(itemName);
        if (item instanceof Weapon)
        {
@@ -113,16 +111,15 @@ public class Player {
        return null;
     }
 
-    public int attack(int times)
-    {
+    public int attack(int times) {
         if (this.eqWeapon != null) {
             int dmg = eqWeapon.use(times);
             return dmg;
         }
         return 4;
     }
-    public Weapon getWeapon()
-    {
+
+    public Weapon getWeapon() {
         return eqWeapon;
     }
 }

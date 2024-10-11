@@ -13,8 +13,7 @@ public class Adventure {
         }
     }
 
-    public Player getPlayer()
-    {
+    public Player getPlayer() {
         return p;
     }
 
@@ -34,7 +33,7 @@ public class Adventure {
                 int eDam = e.Attack(1);
                 exitMessage = exitMessage + "\n" + eNam + " hp = " + e.getHp();
                 p.modifyHp(-eDam);
-                exitMessage = exitMessage + "\n" + eNam + " strikes you with " + eWep + " for " + eDam + "\n" + "your hp = " + p.getHealt();
+                exitMessage = exitMessage + "\n" + eNam + " strikes you with " + eWep + " for " + eDam + "\n" + "your hp is nowm " + p.getHealt();
             } else {
                 exitMessage = exitMessage + "\n" + eNam + " dies leaving his weapon, " + eWep + " on the floor";
                 e.kill();
